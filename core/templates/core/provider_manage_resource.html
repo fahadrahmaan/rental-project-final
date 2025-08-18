@@ -1,0 +1,260 @@
+{% extends "core/provider_base.html" %}
+{% load static %}
+
+{% block title %}Manage Resources{% endblock %}
+
+{% block content %}
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  th {
+    background-color: #f8f9fa;
+    color: #333;
+    text-align: left;
+    padding: 12px;
+  }
+  td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+  }
+  .thumbnail {
+    width: 60px;
+    border-radius: 5px;
+    margin-top: 6px;
+  }
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  input[type="text"], select, input[type="file"] {
+    padding: 6px;
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  h1, h2 {
+    font-weight: 700;
+    color: #19232e;
+    margin-top: 30px;
+  }
+</style>
+
+<div class="admin-container">
+  <h1>Manage Resources</h1>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- BIKES -->
+  <h2>Bikes</h2>
+  <table>
+    <tr><th>Name</th><th>Type</th><th>Daily Rent</th><th>Image</th><th>Actions</th></tr>
+    {% for bike in bikes %}
+    <tr>
+      <form action="{% url 'provider_edit_bike' bike.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <td><input type="text" name="name" value="{{ bike.name }}"></td>
+        <td>
+          <select name="type">
+            <option value="Scooter" {% if bike.type == "Scooter" %}selected{% endif %}>Scooter</option>
+            <option value="Offroad Bike" {% if bike.type == "Offroad Bike" %}selected{% endif %}>Offroad Bike</option>
+            <option value="Sports Bike" {% if bike.type == "Sports Bike" %}selected{% endif %}>Sports Bike</option>
+            <option value="Normal Bike" {% if bike.type == "Normal Bike" %}selected{% endif %}>Normal Bike</option>
+          </select>
+        </td>
+        <td><input type="text" name="daily_rent_price" value="{{ bike.daily_rent_price }}"></td>
+        <td>
+          <input type="file" name="image">
+          {% if bike.image %}<img src="{{ bike.image.url }}" class="thumbnail">{% endif %}
+        </td>
+        <td>
+          <button type="submit">Edit</button>
+      </form>
+      <form action="{% url 'provider_delete_bike' bike.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+      </form>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- BIKE STATIONS -->
+  <h2>Bike Stations</h2>
+  <table>
+    <tr><th>Name</th><th>Longitude</th><th>Latitude</th><th>Location</th><th>Image</th><th>Actions</th></tr>
+    {% for station in bike_stations %}
+    <tr>
+      <form action="{% url 'provider_edit_bike_station' station.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <td><input type="text" name="name" value="{{ station.name }}"></td>
+        <td><input type="text" name="longitude" value="{{ station.longitude }}"></td>
+        <td><input type="text" name="latitude" value="{{ station.latitude }}"></td>
+        <td><input type="text" name="location" value="{{ station.location }}"></td>
+        <td>
+          <input type="file" name="image">
+          {% if station.image %}<img src="{{ station.image.url }}" class="thumbnail">{% endif %}
+        </td>
+        <td>
+          <button type="submit">Edit</button>
+      </form>
+      <form action="{% url 'provider_delete_bike_station' station.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+      </form>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- CARS -->
+  <h2>Cars</h2>
+  <table>
+    <tr><th>Name</th><th>Type</th><th>Daily Rent</th><th>Image</th><th>Actions</th></tr>
+    {% for car in cars %}
+    <tr>
+      <form action="{% url 'provider_edit_car' car.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <td><input type="text" name="name" value="{{ car.name }}"></td>
+        <td>
+          <select name="type">
+            <option value="SUV Car" {% if car.type == "SUV Car" %}selected{% endif %}>SUV Car</option>
+            <option value="Sedan Car" {% if car.type == "Sedan Car" %}selected{% endif %}>Sedan Car</option>
+            <option value="Compact Car" {% if car.type == "Compact Car" %}selected{% endif %}>Compact Car</option>
+            <option value="Sports Car" {% if car.type == "Sports Car" %}selected{% endif %}>Sports Car</option>
+          </select>
+        </td>
+        <td><input type="text" name="daily_rent_price" value="{{ car.daily_rent_price }}"></td>
+        <td>
+          <input type="file" name="image">
+          {% if car.image %}<img src="{{ car.image.url }}" class="thumbnail">{% endif %}
+        </td>
+        <td>
+          <button type="submit">Edit</button>
+      </form>
+      <form action="{% url 'provider_delete_car' car.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+      </form>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- CAR STATIONS -->
+  <h2>Car Stations</h2>
+  <table>
+    <tr><th>Name</th><th>Longitude</th><th>Latitude</th><th>Location</th><th>Image</th><th>Actions</th></tr>
+    {% for station in car_stations %}
+    <tr>
+      <form action="{% url 'provider_edit_car_station' station.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <td><input type="text" name="name" value="{{ station.name }}"></td>
+        <td><input type="text" name="longitude" value="{{ station.longitude }}"></td>
+        <td><input type="text" name="latitude" value="{{ station.latitude }}"></td>
+        <td><input type="text" name="location" value="{{ station.location }}"></td>
+        <td>
+          <input type="file" name="image">
+          {% if station.image %}<img src="{{ station.image.url }}" class="thumbnail">{% endif %}
+        </td>
+        <td>
+          <button type="submit">Edit</button>
+      </form>
+      <form action="{% url 'provider_delete_car_station' station.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+      </form>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- ROOMS -->
+  <h2>Rooms</h2>
+  <table>
+    <tr><th>Name</th><th>Type</th><th>Night Rate</th><th>Description</th><th>Image</th><th>Actions</th></tr>
+    {% for room in rooms %}
+    <tr>
+      <form action="{% url 'provider_edit_room' room.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <td><input type="text" name="name" value="{{ room.name }}"></td>
+        <td>
+          <select name="type">
+            <option value="Single Room" {% if room.type == "Single Room" %}selected{% endif %}>Single Room</option>
+            <option value="Double Room" {% if room.type == "Double Room" %}selected{% endif %}>Double Room</option>
+            <option value="Luxury Room" {% if room.type == "Luxury Room" %}selected{% endif %}>Luxury Room</option>
+          </select>
+        </td>
+        <td><input type="text" name="night_rate" value="{{ room.night_rate }}"></td>
+        <td><input type="text" name="description" value="{{ room.description }}"></td>
+        <td>
+          <input type="file" name="image">
+          {% if room.image %}<img src="{{ room.image.url }}" class="thumbnail">{% endif %}
+        </td>
+        <td>
+          <button type="submit">Edit</button>
+      </form>
+      <form action="{% url 'provider_delete_room' room.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+      </form>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- HOMESTAYS -->
+  <h2>Homestays</h2>
+  <table>
+    <tr><th>Name</th><th>Type</th><th>Location</th><th>Phone Number</th><th>Image</th><th>Actions</th></tr>
+    {% for homestay in homestays %}
+    <tr>
+      <form action="{% url 'provider_edit_homestay' homestay.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <td><input type="text" name="name" value="{{ homestay.name }}"></td>
+        <td>
+          <select name="type">
+            <option value="Apartment" {% if homestay.type == "Apartment" %}selected{% endif %}>Apartment</option>
+            <option value="House" {% if homestay.type == "House" %}selected{% endif %}>House</option>
+            <option value="Flat" {% if homestay.type == "Flat" %}selected{% endif %}>Flat</option>
+          </select>
+        </td>
+        <td><input type="text" name="location" value="{{ homestay.location }}"></td>
+        <td><input type="text" name="phone_number" value="{{ homestay.phone_number }}"></td>
+        <td>
+          <input type="file" name="image">
+          {% if homestay.image %}<img src="{{ homestay.image.url }}" class="thumbnail">{% endif %}
+        </td>
+        <td>
+          <button type="submit">Edit</button>
+      </form>
+      <form action="{% url 'provider_delete_homestay' homestay.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+      </form>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

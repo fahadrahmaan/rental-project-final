@@ -1,0 +1,39 @@
+{% extends 'core/customer_base.html' %}
+
+{% block title %}Rent Bike{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center;">Rent Bike</h1>
+
+{% if messages %}
+  <div style="max-width: 700px; margin: auto;">
+    {% for message in messages %}
+      <div style="color: red; font-weight: bold; margin-bottom: 10px;">{{ message }}</div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<div style="display: flex; justify-content: space-between; align-items: center; max-width: 700px; padding: 20px; margin: 25px auto; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); background-color: #fff;">
+  <div style="flex: 1;">
+    <h2 style="margin-top: 0;">{{ bike.name }}</h2>
+    <p><strong>Station:</strong> {{ bike.station.name }}</p>
+    <p><strong>Type:</strong> {{ bike.get_bike_type_display }}</p>
+    <p><strong>Price per Day:</strong> ₹{{ bike.daily_rent_price }}</p>
+
+    <form method="post" style="margin-top: 15px;">
+      {% csrf_token %}
+      <label for="rent_date">Rent Date:</label><br>
+      <input type="date" id="rent_date" name="rent_date" required style="margin-bottom: 10px;"><br>
+
+      <label for="return_date">Return Date:</label><br>
+      <input type="date" id="return_date" name="return_date" required style="margin-bottom: 20px;"><br>
+
+      <button type="submit" style="padding: 8px 16px; background-color: #17a2b8; color: white; border: none; border-radius: 5px;">Rent this Bike</button>
+    </form>
+  </div>
+
+  <div style="margin-left: 25px;">
+    <img src="{{ bike.image.url }}" alt="{{ bike.name }}" style="width: 350px; height: auto; border-radius: 6px;">
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'core/admin_base.html' %}
+{% load static %}
+
+{% block title %}Admin Reports{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h1 style="text-align: center; margin-bottom: 30px;">Platform Reports</h1>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+
+        <!-- Total Bookings -->
+        <div
+            style="background-color: #ffffffcc; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); min-width: 250px; text-align: center;">
+            <h3 style="color: #333;">Total Bookings</h3>
+            <p style="font-size: 24px; font-weight: bold; color: #4CAF50;">{{ total_bookings }}</p>
+            <small>(Bikes: {{ total_bike_bookings }}, Cars: {{ total_car_bookings }}, Homestays: {{ total_homestay_bookings }})</small>
+        </div>
+
+        <!-- Total Revenue -->
+        <div
+            style="background-color: #ffffffcc; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); min-width: 250px; text-align: center;">
+            <h3 style="color: #333;">Total Revenue</h3>
+            <p style="font-size: 24px; font-weight: bold; color: #2196F3;">₹{{ total_revenue }}</p>
+        </div>
+
+        <!-- Total Feedback -->
+        <div
+            style="background-color: #ffffffcc; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); min-width: 250px; text-align: center;">
+            <h3 style="color: #333;">Total Feedback Received</h3>
+            <p style="font-size: 24px; font-weight: bold; color: #FF9800;">{{ feedback_count }}</p>
+        </div>
+
+        <div
+            style="background-color: #ffffffcc; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); min-width: 250px; text-align: center;">
+            <h3 style="color: #333;">Platform Fees (10%)</h3>
+            <p style="font-size: 24px; font-weight: bold; color: #9C27B0;">₹{{ platform_fees|floatformat:2 }}</p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

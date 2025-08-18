@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Our Services</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="logo"><span>Roamly</span></div>
+      <nav>
+        <ul>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          <li><a href="{% url 'services' %}">Services</a></li>
+          <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>Our Services</h1>
+        <p>Roamly offers a range of rental services:</p>
+        <ul>
+          <li>🚗 Car Rentals – Comfortable, clean vehicles for short or long trips</li>
+          <li>🏍️ Bike Rentals – Easy and budget-friendly bikes for quick travel</li>
+          <li>🏡 Homestays – Cozy, trusted accommodations for any location</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>

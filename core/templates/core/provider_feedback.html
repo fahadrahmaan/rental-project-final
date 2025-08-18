@@ -1,0 +1,69 @@
+{% extends 'core/provider_base.html' %}
+
+{% block title %}User Feedback{% endblock %}
+
+{% block content %}
+<h1>User Feedback</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Type</th>
+      <th>Resource</th>
+      <th>Feedback</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if feedback_list %}
+      {% for feedback in feedback_list %}
+        <tr>
+          <td>{{ feedback.user.username }}</td>
+
+          <td>{{ feedback.user.email|default:"Not provided" }}</td>
+
+          <td>
+            {% if feedback.user.profile.phone_number %}
+              {{ feedback.user.profile.phone_number }}
+            {% else %}
+              Not provided
+            {% endif %}
+          </td>
+
+          <td>
+            {% if feedback.bike_station %}
+              Bike Station
+            {% elif feedback.car_station %}
+              Car Station
+            {% elif feedback.homestay %}
+              Homestay
+            {% else %}
+              Unknown
+            {% endif %}
+          </td>
+
+          <td>
+            {% if feedback.bike_station %}
+              {{ feedback.bike_station.name }}
+            {% elif feedback.car_station %}
+              {{ feedback.car_station.name }}
+            {% elif feedback.homestay %}
+              {{ feedback.homestay.name }}
+            {% else %}
+              -
+            {% endif %}
+          </td>
+
+          <td>{{ feedback.feedback }}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="6">No feedback available.</td>
+      </tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'core/provider_base.html' %}
+{% block title %}Add Car Station Details{% endblock %}
+
+{% block content %}
+<h1>Add Car Station Details</h1>
+
+<div class="admin-container">
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+<form method="post" class="form-box" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label for="id_name">Car Station Name:</label>
+  {{ form.name }}
+
+  <label for="id_longitude">Longitude:</label>
+  {{ form.longitude }}
+
+  <label for="id_latitude">Latitude:</label>
+  {{ form.latitude }}
+
+  <label for="id_location">Location:</label>
+  {{ form.location }}
+  
+  <label for="id_image">Image:</label>
+  {{ form.image }}
+
+  <button type="submit" class="btn">Add Car Station</button>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Customer{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+    body {
+      background-image: url("{% static 'images/custom1.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: 'Poppins', sans-serif;
+    }
+</style>
+<header>
+  <div class="container">
+    <div class="logo"><span>Roamly</span></div>
+    <nav>
+      <ul>
+        <li><a href="{% url 'customer_dashboard' %}">Home</a></li>
+        <li><a href="{% url 'homestay_list' %}">Book Home Stay</a></li>
+        <li><a href="{% url 'bike_station_list' %}">Book Bike</a></li>
+        <li><a href="{% url 'car_station_list' %}">Book Car</a></li>
+        <li><a href="{% url 'booking_history' %}">Book History</a></li>
+        <li><a href="{% url 'feedback' %}">Feedback</a></li>
+        <li><a href="{% url 'edit_customer_profile' %}">Edit Profile</a></li>  <!-- ✅ New Button -->
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="admin-container">
+  {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

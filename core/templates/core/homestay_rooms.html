@@ -1,0 +1,65 @@
+{% extends 'core/customer_base.html' %}
+
+{% block title %}Home Stay{% endblock %}
+
+{% block content %}
+  <h1>Home Stay</h1>
+  <h2>{{ homestay.name }}</h2>
+
+  <div class="room-list">
+    {% if rooms %}
+      {% for room in rooms %}
+        <div class="room-card" style="display: flex; justify-content: space-between; align-items: center; max-width: 750px; padding: 18px; margin: 25px auto; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); background-color: #fff;">
+          <div style="flex: 1;">
+            <h3 style="margin-top: 0;">{{ room.name }}</h3>
+            <p><strong>Type:</strong> {{ room.room_type|capfirst }}</p>
+            <p><strong>Rent per night:</strong> ₹{{ room.night_rate }}</p>
+            <p><strong>Description:</strong> {{ room.description }}</p>
+            <form method="get" action="{% url 'homestay_booking' room.id %}">
+              <button type="submit" style="padding: 8px 18px; font-size: 14px; background-color: #000000; color: white; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#000000'">Select Room</button>
+            </form>
+          </div>
+          {% if room.image %}
+            <img src="{{ room.image.url }}" alt="{{ room.name }}" style="width: 350px; height: auto; margin-left: 20px; border-radius: 8px;">
+          {% else %}
+            <div style="width: 180px; height: 120px; margin-left: 20px; background: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center;">No Image</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="text-align: center; margin-top: 40px; font-size: 18px; color: #555;">Rooms are not currently available at the moment</p>
+    {% endif %}
+  </div>
+
+ <hr>
+<h2 style="text-align:center; margin-top: 50px;">
+  🏡 <span style="background-color: #0077cc; color: white; padding: 6px 14px; border-radius: 6px;">Recommended Nearby</span>
+</h2>
+
+<div class="homestay-list">
+  <div style="max-width: 1000px; margin: 0 auto; padding-top: 10px;">
+    {% for rec in recommended_homestays %}
+      {% with sim=rec.homestay %}
+        <div style="display: flex; align-items: center; margin-bottom: 20px; padding: 16px; border-left: 6px solid #0077cc; background-color: #f9f9f9; border-radius: 10px;">
+          {% if sim.image %}
+            <img src="{{ sim.image.url }}" alt="{{ sim.name }}" style="width: 120px; height: 100px; object-fit: cover; border-radius: 8px; margin-right: 20px;">
+          {% else %}
+            <div style="width: 120px; height: 100px; background-color: #ddd; margin-right: 20px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">No Image</div>
+          {% endif %}
+
+          <div style="flex: 1;">
+            <h3 style="margin: 0;">{{ sim.name }}</h3>
+            <p style="margin: 2px 0;"><strong>Type:</strong> {{ sim.property_type|capfirst }}</p>
+            <p style="margin: 2px 0;"><strong>Location:</strong> {{ sim.location }}</p>
+            <p style="font-style: italic; font-size: 13px; color: #0077cc;">{{ rec.reason }}</p>
+            <a href="{% url 'homestay_rooms' sim.id %}" style="display: inline-block; margin-top: 8px; padding: 6px 14px; font-size: 13px; background-color: #0077cc; color: white; text-decoration: none; border-radius: 4px;">View Details</a>
+          </div>
+        </div>
+      {% endwith %}
+    {% empty %}
+      <p style="text-align: center;">No similar homestays found in this location.</p>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

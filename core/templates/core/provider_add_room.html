@@ -1,0 +1,37 @@
+{% extends 'core/provider_base.html' %}
+{% block title %}Add Room Details{% endblock %}
+
+{% block content %}
+<h1>Add Room Details</h1>
+<div class="admin-container">
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+<form method="post" class="form-box" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label for="id_homestay">Homestay Name:</label>
+  {{ form.homestay }}
+  
+  <label for="id_name">Room Name:</label>
+  {{ form.name }}
+  
+  <label for="id_room_type">Room Type:</label>
+  {{ form.room_type }}
+  
+  <label for="id_night_rate">Night Rate:</label>
+  {{ form.night_rate }}
+  
+  <label for="id_description">Room Description:</label>
+  {{ form.description }}
+  
+  <label for="id_image">Image:</label>
+  {{ form.image }}
+
+  <button type="submit" class="btn">Add Room</button>
+</form>
+</div>
+{% endblock %}

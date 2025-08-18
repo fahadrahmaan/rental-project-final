@@ -1,0 +1,95 @@
+{% extends 'core/customer_base.html' %}
+
+{% block title %}Customer Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome to Roamly, {{ request.user.username|capfirst }}!</h1>
+<p>Explore the best homestays, bikes, and cars for your travels!</p>
+
+<hr>
+<h2 style="text-align: center; margin-top: 50px;">
+  🏡 <span style="background-color: #28a745; color: white; padding: 6px 14px; border-radius: 6px;">Recommended Homestays</span>
+</h2>
+
+<div class="homestay-list">
+  <div style="max-width: 1000px; margin: 0 auto; padding-top: 10px;">
+    {% for entry in suggested_homestays %}
+      {% with sim=entry.item tag=entry.tag %}
+      <div style="display: flex; align-items: center; margin-bottom: 20px; padding: 16px; border-left: 6px solid #28a745; background-color: #f9f9f9; border-radius: 10px;">
+        {% if sim.image %}
+          <img src="{{ sim.image.url }}" alt="{{ sim.name }}" style="width: 120px; height: 100px; object-fit: cover; border-radius: 8px; margin-right: 20px;">
+        {% else %}
+          <div style="width: 120px; height: 100px; background-color: #ddd; margin-right: 20px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">No Image</div>
+        {% endif %}
+
+        <div style="flex: 1;">
+          <h3 style="margin: 0;">{{ sim.name }}</h3>
+          <p style="margin: 2px 0;"><strong>Location:</strong> {{ sim.location }}</p>
+          <p style="margin: 2px 0;"><strong>Type:</strong> {{ sim.property_type|capfirst }}</p>
+          <p style="margin: 2px 0;"><em>{{ tag }}</em></p>
+          <a href="{% url 'homestay_rooms' sim.id %}" style="display: inline-block; margin-top: 8px; padding: 6px 14px; font-size: 13px; background-color: #28a745; color: white; text-decoration: none; border-radius: 4px;">View Rooms</a>
+        </div>
+      </div>
+      {% endwith %}
+    {% endfor %}
+  </div>
+</div>
+
+<hr>
+<h2 style="text-align: center; margin-top: 50px;">
+  🛵 <span style="background-color: #007bff; color: white; padding: 6px 14px; border-radius: 6px;">Recommended Bikes</span>
+</h2>
+
+<div class="bike-list">
+  <div style="max-width: 1000px; margin: 0 auto; padding-top: 10px;">
+    {% for entry in suggested_bikes %}
+      {% with bike=entry.item tag=entry.tag %}
+      <div style="display: flex; align-items: center; margin-bottom: 20px; padding: 16px; border-left: 6px solid #007bff; background-color: #f9f9f9; border-radius: 10px;">
+        {% if bike.image %}
+          <img src="{{ bike.image.url }}" alt="{{ bike.name }}" style="width: 120px; height: 100px; object-fit: cover; border-radius: 8px; margin-right: 20px;">
+        {% else %}
+          <div style="width: 120px; height: 100px; background-color: #ddd; margin-right: 20px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">No Image</div>
+        {% endif %}
+
+        <div style="flex: 1;">
+          <h3 style="margin: 0;">{{ bike.name }}</h3>
+          <p style="margin: 2px 0;"><strong>Station:</strong> {{ bike.station.name }}</p>
+          <p style="margin: 2px 0;"><strong>Rent Per Day:</strong> ₹{{ bike.daily_rent_price }}</p>
+          <p style="margin: 2px 0;"><em>{{ tag }}</em></p>
+          <a href="{% url 'rent_bike' bike.station.id bike.id %}" style="display: inline-block; margin-top: 8px; padding: 6px 14px; font-size: 13px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Book Now</a>
+        </div>
+      </div>
+      {% endwith %}
+    {% endfor %}
+  </div>
+</div>
+
+<hr>
+<h2 style="text-align: center; margin-top: 50px;">
+  🚗 <span style="background-color: #dc3545; color: white; padding: 6px 14px; border-radius: 6px;">Recommended Cars</span>
+</h2>
+
+<div class="car-list">
+  <div style="max-width: 1000px; margin: 0 auto; padding-top: 10px;">
+    {% for entry in suggested_cars %}
+      {% with car=entry.item tag=entry.tag %}
+      <div style="display: flex; align-items: center; margin-bottom: 20px; padding: 16px; border-left: 6px solid #dc3545; background-color: #f9f9f9; border-radius: 10px;">
+        {% if car.image %}
+          <img src="{{ car.image.url }}" alt="{{ car.name }}" style="width: 120px; height: 100px; object-fit: cover; border-radius: 8px; margin-right: 20px;">
+        {% else %}
+          <div style="width: 120px; height: 100px; background-color: #ddd; margin-right: 20px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">No Image</div>
+        {% endif %}
+
+        <div style="flex: 1;">
+          <h3 style="margin: 0;">{{ car.name }}</h3>
+          <p style="margin: 2px 0;"><strong>Station:</strong> {{ car.station.name }}</p>
+          <p style="margin: 2px 0;"><strong>Rent Per Day:</strong> ₹{{ car.daily_rent_price }}</p>
+          <p style="margin: 2px 0;"><em>{{ tag }}</em></p>
+          <a href="{% url 'rent_car' car.station.id car.id %}" style="display: inline-block; margin-top: 8px; padding: 6px 14px; font-size: 13px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 4px;">Book Now</a>
+        </div>
+      </div>
+      {% endwith %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

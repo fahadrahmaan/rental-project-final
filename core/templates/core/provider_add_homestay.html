@@ -1,0 +1,32 @@
+{% extends 'core/provider_base.html' %}
+{% block title %}Add Home Stay Details{% endblock %}
+
+{% block content %}
+<h1>Add Home Stay Details</h1>
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+<form method="post" enctype="multipart/form-data" class="form-box">
+  {% csrf_token %}
+  <label for="id_name">Property Name:</label>
+  {{ form.name }}
+  
+  <label for="id_property_type">Property Type:</label>
+  {{ form.property_type }}
+  
+  <label for="id_location">Location:</label>
+  {{ form.location }}
+  
+  <label for="id_phone_number">Phone Number:</label>
+  {{ form.phone_number }}
+  
+  <label for="id_image">Home Stay Image:</label>
+  {{ form.image }}
+  
+  <button type="submit" class="btn">Add Home Stay</button>
+</form>
+{% endblock %}

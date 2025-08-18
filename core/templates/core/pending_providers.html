@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pending Service Provider Approvals</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .provider-list {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .provider-card {
+      padding: 15px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .provider-card:last-child {
+      border-bottom: none;
+    }
+
+    .provider-card strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .action-btns a {
+      padding: 6px 12px;
+      margin-right: 10px;
+      text-decoration: none;
+      background-color: #28a745;
+      color: white;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+
+    .action-btns a.reject {
+      background-color: #dc3545;
+    }
+
+    .no-providers {
+      font-size: 18px;
+      color: #333;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo"><span>Roamly Admin</span></div>
+    <nav>
+      <ul>
+        <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-text">
+      <h1>Pending Provider Approvals</h1>
+
+      <div class="provider-list">
+        {% if pending %}
+          {% for provider in pending %}
+            <div class="provider-card">
+              <strong>{{ provider.business_name }}</strong>
+              <div>Username: {{ provider.user.username }}</div>
+              <div>Phone: {{ provider.contact_number }}</div>
+              <div class="action-btns" style="margin-top: 10px;">
+                <a href="{% url 'approve_provider' provider.id %}">Accept</a>
+                <a href="{% url 'reject_provider' provider.id %}" class="reject">Reject</a>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="no-providers">✅ All service providers have been approved!</div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

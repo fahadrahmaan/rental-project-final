@@ -1,0 +1,94 @@
+{% extends 'core/customer_base.html' %}
+
+{% block content %}
+<div class="customer-container">
+  <h1>Your Booking History</h1>
+
+  <!-- Bike Bookings -->
+  <h2>Bike Bookings</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Bike Station</th>
+        <th>Bike</th>
+        <th>Rent Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+        <th>Rent Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bike_bookings %}
+        <tr>
+          <td>{{ booking.bike_station.name }}</td>
+          <td>{{ booking.bike.name }}</td>
+          <td>{{ booking.rent_date }}</td>
+          <td>{{ booking.return_date }}</td>
+          <td>{{ booking.status }}</td>
+          <td>{{ booking.rent_amount }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6">No bike bookings found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Car Bookings -->
+  <h2>Car Bookings</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Car Station</th>
+        <th>Car</th>
+        <th>Rent Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+        <th>Rent Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in car_bookings %}
+        <tr>
+          <td>{{ booking.car_station.name }}</td>
+          <td>{{ booking.car.name }}</td>
+          <td>{{ booking.rent_date }}</td>
+          <td>{{ booking.return_date }}</td>
+          <td>{{ booking.status }}</td>
+          <td>{{ booking.rent_amount }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6">No car bookings found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Homestay Bookings -->
+  <h2>Homestay Bookings</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Check In</th>
+        <th>Check Out</th>
+        <th>Status</th>
+        <th>Rent Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in homestay_bookings %}
+        <tr>
+          <td>{{ booking.room.homestay.name }}</td>
+          <td>{{ booking.room.homestay.location }}</td>
+          <td>{{ booking.check_in }}</td>
+          <td>{{ booking.check_out }}</td>
+          <td>{{ booking.status }}</td>
+          <td>{{ booking.rent_amount }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5">No homestay bookings found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

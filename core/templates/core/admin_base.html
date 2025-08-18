@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Admin Dashboard{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .dropdown { position: relative; display: inline-block; }
+    .dropdown-content { display: none; position: absolute; background-color: #f9f9f9; min-width: 150px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1; }
+    .dropdown-content a { color: black; padding: 8px 12px; text-decoration: none; display: block; }
+    .dropdown-content a:hover { background-color: #f1f1f1; }
+    .dropdown:hover .dropdown-content { display: block; }
+    body {
+      background-image: url("{% static 'C:\\Users\\hp\\rental_portal\\static\\images\\custom1.jpg' %}"); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo"><span>Roamly Admin</span></div>
+    <nav>
+      <ul>
+        <li><a href="{% url 'admin_dashboard' %}">Home</a></li>
+
+        <!-- Removed: Add Dropdown -->
+
+        <li><a href="{% url 'user_details' %}">User Details</a></li>
+
+        <!-- ✅ Direct Pending Provider Approvals Button -->
+        <li><a href="{% url 'pending_providers' %}">Pending Provider Approvals</a></li>
+
+        <li><a href="{% url 'user_feedback' %}">User Feedback</a></li>
+        <li><a href="{% url 'admin_reports' %}">Reports</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="admin-container">
+  {% block content %}
+  <!-- Page-specific content here -->
+  {% endblock %}
+</div>
+
+</body>
+</html>

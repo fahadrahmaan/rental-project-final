@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roamly - Car, Bike & Homestay Rentals</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span>Roamly</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'services' %}">Services</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Discover & Rent<br>Cars, Bikes & Stays</h1>
+                <p>Roamly connects you with the best rental services, making your travel seamless and unforgettable.
+                    Explore our curated listings and start your next adventure today.</p>
+                <a href="{% url 'choose_registration' %}" class="btn">Get Started</a>
+            </div>
+            <div class="hero-image">
+                <img src="{% static 'images/hero-image.jpeg' %}" alt="Hero Image">
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

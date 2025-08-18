@@ -1,0 +1,99 @@
+{% extends 'core/provider_base.html' %}
+{% load static %}
+
+{% block title %}Manage Bookings{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+  <h1>Manage My Bookings</h1>
+
+  <form method="get" class="form-box">
+    <label for="start_date">From: </label>
+    <input type="date" name="start_date" value="{{ start_date }}">
+    <label for="end_date">To: </label>
+    <input type="date" name="end_date" value="{{ end_date }}">
+    <button type="submit" class="btn">Search</button>
+  </form>
+
+  <!-- Bike Bookings -->
+  <h2>My Bike Bookings</h2>
+  <table>
+    <tr>
+      <th>Customer</th>
+      <th>Bike Station</th>
+      <th>Bike</th>
+      <th>Rent Date</th>
+      <th>Return Date</th>
+      <th>Status</th>
+      <th>Rent Amount</th>
+    </tr>
+    {% for booking in bike_bookings %}
+    <tr>
+      <td>{{ booking.user.get_full_name|default:booking.user.username|capfirst }}</td>
+      <td>{{ booking.bike_station.name }}</td>
+      <td>{{ booking.bike.name }}</td>
+      <td>{{ booking.rent_date }}</td>
+      <td>{{ booking.return_date }}</td>
+      <td>{{ booking.status }}</td>
+      <td>{{ booking.rent_amount }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7">No bike bookings found.</td></tr>
+    {% endfor %}
+  </table>
+
+  <!-- Car Bookings -->
+  <h2>My Car Bookings</h2>
+  <table>
+    <tr>
+      <th>Customer</th>
+      <th>Car Station</th>
+      <th>Car</th>
+      <th>Rent Date</th>
+      <th>Return Date</th>
+      <th>Status</th>
+      <th>Rent Amount</th>
+    </tr>
+    {% for booking in car_bookings %}
+    <tr>
+      <td>{{ booking.user.get_full_name|default:booking.user.username|capfirst }}</td>
+      <td>{{ booking.car_station.name }}</td>
+      <td>{{ booking.car.name }}</td>
+      <td>{{ booking.rent_date }}</td>
+      <td>{{ booking.return_date }}</td>
+      <td>{{ booking.status }}</td>
+      <td>{{ booking.rent_amount }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7">No car bookings found.</td></tr>
+    {% endfor %}
+  </table>
+
+  <!-- Homestay Bookings -->
+  <h2>My Homestay Bookings</h2>
+  <table>
+    <tr>
+      <th>Customer</th>
+      <th>Home Stay</th>
+      <th>Location</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+      <th>Status</th>
+      <th>Rent Amount</th>
+    </tr>
+    {% for booking in homestay_bookings %}
+    <tr>
+      <td>{{ booking.user.get_full_name|default:booking.user.username|capfirst }}</td>
+      <td>{{ booking.room.homestay.name }}</td>
+      <td>{{ booking.room.homestay.location }}</td>
+      <td>{{ booking.check_in }}</td>
+      <td>{{ booking.check_out }}</td>
+      <td>{{ booking.status }}</td>
+      <td>{{ booking.rent_amount }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7">No homestay bookings found.</td></tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'core/provider_base.html' %}
+{% block title %}Provider Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome to Your Provider Dashboard, {{ request.user.username|capfirst }}!</h1>
+<p>You are now logged in as an approved service provider.</p>
+{% endblock %}

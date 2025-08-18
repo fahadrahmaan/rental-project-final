@@ -1,0 +1,217 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #22333b;
+  background: #eae0d5;
+  line-height: 1.6;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Use .admin-container for vertical stacking in admin pages */
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* or 0.5rem if you want less spacing */
+  padding: 1rem 2rem; /* adjust as needed */
+}
+.admin-container .card,
+.admin-container form,
+.admin-container table {
+  margin-bottom: 2rem;
+}
+
+/* Header */
+header {
+  background: #0a0908;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  color: #eae0d5;
+}
+.logo span {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #eae0d5;
+  font-weight: 500;
+}
+nav ul li a:hover {
+  color: #c6ac8f;
+}
+.header-btn .btn {
+  background: #5e503f;
+  color: #eae0d5;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.header-btn .btn:hover {
+  background: #c6ac8f;
+  color: #22333b;
+}
+
+/* Hero Section */
+.hero {
+  background: #eae0d5;
+  padding: 4rem 0;
+}
+.hero-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.hero-text {
+  flex: 1 1 50%;
+  max-width: 600px;
+}
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #0a0908;
+}
+.hero-text p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #5e503f;
+}
+.hero-text .btn {
+  background: #5e503f;
+  color: #eae0d5;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.hero-text .btn:hover {
+  background: #c6ac8f;
+  color: #22333b;
+}
+.hero-image {
+  flex: 1 1 40%;
+}
+.hero-image img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Form Styling */
+.form-box label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #0a0908;
+}
+.form-box input,
+.form-box select,
+.form-box textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+.form-box button.btn {
+  background-color: #5e503f;
+  color: #eae0d5;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.form-box button.btn:hover {
+  background-color: #c6ac8f;
+  color: #22333b;
+}
+button:focus {
+  outline: 2px solid #c6ac8f;
+  outline-offset: 2px;
+}
+
+/* Flash Messages */
+ul.messages {
+  list-style: none;
+  padding: 1rem;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  max-width: 600px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+  border: 1px solid #ccc;  /* ✅ ensures visible borders */
+  padding: 0.75rem;
+  text-align: left;
+}
+
+th {
+  background-color: #ffffff; /* heading background */
+  color: #000000;               /* heading text color */
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;  /* subtle row striping */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;  /* spacing between fields */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+  }
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+  .hero-image {
+    order: -1;
+  }
+}

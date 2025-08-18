@@ -1,0 +1,23 @@
+{% extends 'core/customer_base.html' %}
+
+{% block title %}Booking Successful{% endblock %}
+
+{% block content %}
+  <div style="max-width: 600px; margin: 30px auto; padding: 25px; text-align: center;">
+    <h2 style="color: green; margin-bottom: 15px;">✅ Booking Confirmed!</h2>
+
+    {% if booking_type == 'homestay' %}
+      <p style="margin-bottom: 30px;">Your <strong>homestay</strong> booking has been successfully completed.</p>
+    {% elif booking_type == 'bike' %}
+      <p style="margin-bottom: 30px;">Your <strong>bike</strong> booking has been successfully completed.</p>
+    {% elif booking_type == 'car' %}
+      <p style="margin-bottom: 30px;">Your <strong>car</strong> booking has been successfully completed.</p>
+    {% else %}
+      <p style="margin-bottom: 30px;">Your booking has been successfully completed.</p>
+    {% endif %}
+
+    <a href="{% url 'customer_dashboard' %}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; margin-top: 20px;">
+      Back to Dashboard
+    </a>
+  </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'core/customer_base.html' %}
+
+{% block title %}Home Stay{% endblock %}
+
+{% block content %}
+<h1>Home Stay</h1>
+<div
+  style="max-width: 600px; margin: 30px auto; padding: 25px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background-color: #fff;">
+  <h2 style="margin-top: 0;">Booking for: {{ room.name }}</h2>
+
+  <p><strong>Type:</strong> {{ room.room_type|capfirst }}</p>
+  <p><strong>Rent per night:</strong> ₹{{ room.night_rate }}</p>
+  <p><strong>Description:</strong> {{ room.description }}</p>
+
+  {% if messages %}
+  <div style="margin-bottom: 15px;">
+    {% for message in messages %}
+    <div style="color: red; font-weight: bold;">
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <form method="post" style="margin-top: 20px;">
+    {% csrf_token %}
+
+    <div style="margin-bottom: 15px;">
+      <label for="number_of_nights"><strong>Number of nights:</strong></label><br>
+      <input type="number" id="number_of_nights" name="number_of_nights" required min="1"
+        style="width: 100%; padding: 8px; margin-top: 5px;">
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <label for="check_in_day"><strong>Check-in date:</strong></label><br>
+      <input type="date" id="check_in_day" name="check_in_day" required
+        style="width: 100%; padding: 8px; margin-top: 5px;">
+    </div>
+
+    <div style="text-align: center;">
+      <button type="submit"
+        style="padding: 10px 20px; font-size: 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Book Home Stay
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

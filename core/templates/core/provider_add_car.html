@@ -1,0 +1,32 @@
+{% extends 'core/provider_base.html' %}
+{% block title %}Add Car Details{% endblock %}
+
+{% block content %}
+<h1>Add Car Details</h1>
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<form method="post" enctype="multipart/form-data" class="form-box">
+  {% csrf_token %}
+  <label for="id_station">Car Station:</label>
+  {{ form.station }}
+  
+  <label for="id_name">Car Name:</label>
+  {{ form.name }}
+  
+  <label for="id_car_type">Car Type:</label>
+  {{ form.car_type }}
+  
+  <label for="id_daily_rent_price">Daily Rent Price:</label>
+  {{ form.daily_rent_price }}
+  
+  <label for="id_image">Car Image:</label>
+  {{ form.image }}
+  
+  <button type="submit" class="btn">Add Car</button>
+</form>
+{% endblock %}

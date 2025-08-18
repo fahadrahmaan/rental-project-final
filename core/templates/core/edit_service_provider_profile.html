@@ -1,0 +1,40 @@
+{% extends 'core/provider_base.html' %}
+{% load static %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+
+<!-- ✅ Success Message -->
+{% if messages %}
+  <div style="max-width: 600px; margin: 20px auto;">
+    {% for message in messages %}
+      <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; border: 1px solid #c3e6cb; margin-bottom: 10px;">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<!-- ✅ Profile Edit Form -->
+<div class="form-container" style="background-color: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 10px; max-width: 600px; margin: 40px auto;">
+  <h2 style="text-align: center; margin-bottom: 20px;">Edit Service Provider Profile</h2>
+
+  <form method="post" style="display: flex; flex-direction: column; gap: 15px;">
+    {% csrf_token %}
+
+    <fieldset style="border: none;">
+      <legend style="font-weight: 600;">Business Information</legend>
+      {{ provider_form.as_p }}
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Save Changes</button>
+  </form>
+
+  <!-- ✅ Password Change Link -->
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="{% url 'password_change' %}" style="color: #007bff; text-decoration: underline;">Change Password</a>
+  </div>
+</div>
+
+{% endblock %}

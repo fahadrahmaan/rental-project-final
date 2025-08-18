@@ -1,0 +1,64 @@
+{% extends 'core/customer_base.html' %}
+
+{% block title %}Car List{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center;">Available Cars</h1>
+<div class="car-list">
+  {% for car in cars %}
+    <div class="car-card" style="display: flex; justify-content: space-between; align-items: center; max-width: 700px; padding: 18px; margin: 25px auto; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); background-color: #fff;">
+      <div style="flex: 1;">
+        <h2 style="margin-top: 0;">{{ car.name }}</h2>
+        <p><strong>Type:</strong> {{ car.get_car_type_display }}</p>
+        <p><strong>Price:</strong> ₹{{ car.daily_rent_price }}</p>
+        <form method="get" action="{% url 'rent_car' car.station.id car.id %}">
+          <button type="submit" style="padding: 8px 18px; font-size: 14px; background-color: #000000; color: white; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#000000'">Select</button>
+        </form>
+      </div>
+      <div style="margin-left: 25px;">
+        <img src="{{ car.image.url }}" alt="{{ car.name }}" style="width: 350px; height: auto; border-radius: 6px;">
+      </div>
+    </div>
+  {% empty %}
+    <div style="text-align: center; padding: 40px; color: #555;">
+      <h3>No cars available at the moment.</h3>
+    </div>
+  {% endfor %}
+</div>
+
+{% if recommended_cars %}
+  <hr>
+  <h2 style="text-align: center; margin-top: 50px;">
+    🚗 <span style="background-color: #dc3545; color: white; padding: 6px 14px; border-radius: 6px;">
+      {% if recommended_cars.0.station.location == station.location %}
+        Other Cars from the Same Area
+      {% else %}
+        Recommended Cars
+      {% endif %}
+    </span>
+  </h2>
+
+  <div class="car-list">
+    <div style="max-width: 1000px; margin: 0 auto; padding-top: 10px;">
+      {% for car in recommended_cars %}
+        <div style="display: flex; align-items: center; margin-bottom: 20px; padding: 16px; border-left: 6px solid #dc3545; background-color: #f9f9f9; border-radius: 10px;">
+          {% if car.image %}
+            <img src="{{ car.image.url }}" alt="{{ car.name }}" style="width: 120px; height: 100px; object-fit: cover; border-radius: 8px; margin-right: 20px;">
+          {% else %}
+            <div style="width: 120px; height: 100px; background-color: #ddd; margin-right: 20px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">No Image</div>
+          {% endif %}
+
+          <div style="flex: 1;">
+            <h3 style="margin: 0;">{{ car.name }}</h3>
+            <p><strong>Station:</strong> {{ car.station.name }}</p>
+            <p><strong>Location:</strong> {{ car.station.location }}</p>
+            <p><strong>Rent Per Day:</strong> ₹{{ car.daily_rent_price }}</p>
+            <a href="{% url 'rent_car' car.station.id car.id %}" style="display: inline-block; margin-top: 8px; padding: 6px 14px; font-size: 13px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 4px;">Rent This Car</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% endblock %}

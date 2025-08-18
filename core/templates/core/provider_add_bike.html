@@ -1,0 +1,36 @@
+{% extends 'core/provider_base.html' %}
+{% block title %}Add Bike Details{% endblock %}
+
+{% block content %}
+<h1>Add Bike Details</h1>
+
+<div class="admin-container">
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <form method="post" enctype="multipart/form-data" class="form-box">
+    {% csrf_token %}
+    
+    <label for="id_station">Bike Station:</label>
+    {{ form.station }}
+    
+    <label for="id_name">Bike Name:</label>
+    {{ form.name }}
+    
+    <label for="id_bike_type">Bike Type:</label>
+    {{ form.bike_type }}
+    
+    <label for="id_daily_rent_price">Daily Rent Price:</label>
+    {{ form.daily_rent_price }}
+    
+    <label for="id_image">Bike Image:</label>
+    {{ form.image }}
+    
+    <button type="submit" class="btn">Add Bike</button>
+  </form>
+</div>
+{% endblock %}

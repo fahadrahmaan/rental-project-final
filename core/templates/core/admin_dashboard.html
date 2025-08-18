@@ -1,0 +1,18 @@
+{% extends 'core/admin_base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li style="color: green;">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <h1>Welcome, Admin!</h1>
+  <p>This is your admin home page. Use the menu above to manage listings, bookings, and user feedback.</p>
+  <p>If you need advanced settings, you can access the Django admin site:</p>
+  <a href="/admin/" class="btn">Go to Django Admin</a>
+{% endblock %}

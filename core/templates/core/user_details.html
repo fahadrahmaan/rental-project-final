@@ -1,0 +1,83 @@
+{% extends 'core/admin_base.html' %}
+{% load static %}
+
+{% block title %}User Details{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+  <h1>User Details</h1>
+
+  <!-- Admins Table -->
+  <h2>Admins ({{ admin_users|length }})</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Date Joined</th>
+        <th>Is Superuser</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in admin_users %}
+      <tr>
+        <td>{{ user.username|capfirst }}</td>
+        <td>{{ user.email|default:"Not provided" }}</td>
+        <td>{{ user.date_joined }}</td>
+        <td>{{ user.is_superuser }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Service Providers Table -->
+  <h2>Service Providers ({{ provider_users|length }})</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Enterprise Name</th>
+        <th>Phone Number</th>
+        <th>Date Joined</th>
+        <th>Is Superuser</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in provider_users %}
+      <tr>
+        <td>{{ user.username|capfirst }}</td>
+        <td>{{ user.serviceprovider.business_name|default:"Not provided" }}</td>
+        <td>{{ user.serviceprovider.contact_number|default:"Not provided" }}</td>
+        <td>{{ user.date_joined }}</td>
+        <td>{{ user.is_superuser }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Customers Table -->
+  <h2>Customers ({{ customer_users|length }})</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Date Joined</th>
+        <th>Is Superuser</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in customer_users %}
+      <tr>
+        <td>{{ user.username|capfirst }}</td>
+        <td>{{ user.email|default:"Not provided" }}</td>
+        <td>{{ user.profile.phone_number|default:"Not provided" }}</td>
+        <td>{{ user.date_joined }}</td>
+        <td>{{ user.is_superuser }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'core/customer_base.html' %}
+
+{% block title %}Car Stations{% endblock %}
+
+{% block content %}
+<h1>Car Stations</h1>
+<div class="car-station-list">
+  {% for station in car_stations %}
+    <div class="car-station-card" style="display: flex; justify-content: space-between; align-items: center; max-width: 700px; padding: 18px; margin: 25px auto; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); background-color: #fff;">
+      
+      <div style="flex: 1;">
+        <h2 style="margin-top: 0;">{{ station.name }}</h2>
+        <p><strong>Location:</strong> {{ station.location }}</p>
+        <p><strong>Longitude:</strong> {{ station.longitude }}</p>
+        <p><strong>Latitude:</strong> {{ station.latitude }}</p>
+        <form method="get" action="{% url 'car_list' station.id %}">
+          <button type="submit" style="padding: 8px 18px; font-size: 14px; background-color: #000000; color: white; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#000000'">Select</button>
+        </form>
+      </div>
+
+      <div style="margin-left: 25px;">
+        <img src="{{ station.image.url }}" alt="{{ station.name }}" style="width: 350px; height: auto; border-radius: 6px;">
+      </div>
+    </div>
+  {% empty %}
+    <div style="text-align: center; padding: 40px; color: #555;">
+      <h3>No car stations available at the moment.</h3>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
