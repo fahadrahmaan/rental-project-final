@@ -1,4 +1,4 @@
-# Rental Portal 🚗🏍️🏡
+# Rental Portal
 
 A full-stack rental management system built with **Python Django, HTML, CSS, and SQLite**.  
 The platform allows service providers to list cars, bikes, and homestays, while customers can browse, book, and pay seamlessly.  
